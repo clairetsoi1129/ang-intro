@@ -1,8 +1,28 @@
 <h1 class="text-red">Angular App</h1>
-<h1 [class.text-red]="bool">Angular App</h1>
+<h1 [class.text-red]="isActive">Angular App</h1>
 <p>{{ message }}</p>
 
-<h1 [style.color]="bool ? 'red' : 'blue'">Style Binding</h1>
+<!--NgStyle directives-->
+<h1
+  [style.color]="isActive ? 'red' : 'blue'"
+  [style.textTransform]="isActive ? 'uppercase' : 'lowercase'"
+>
+  Style Binding
+</h1>
+
+<h1
+  [ngStyle]="{
+    color: isActive ? 'red' : 'black',
+    textTransform: isActive ? 'uppercase' : 'lowercase'
+  }"
+>
+  NgStyle directives
+</h1>
+
+<!--NgClass directives-->
+<h1 [ngClass]="{ main: isActive, 'text-weight': isActive }">
+  NgClass directives
+</h1>
 
 <app-navbar></app-navbar>
 <app-post
@@ -42,6 +62,7 @@
 />
 <hr />
 
+<!-- Task 1 -->
 <div class="form-area">
   <h1>Post Form</h1>
   <br />
@@ -93,3 +114,121 @@
     More Details</a
   >
 </div>
+
+<!-- Fetched Using ngFor Directive -->
+<p>{{ postArray }}</p>
+<ul>
+  <li *ngFor="let post of postArray">{{ post }}</li>
+</ul>
+
+<!-- Fetched Object Arrays -->
+<ul>
+  <li *ngFor="let post of objArray">{{ post | json }}</li>
+</ul>
+
+<!-- Ng Template -->
+<div *ngIf="objArray.length > 0; then postList; else noData"></div>
+<ng-template #postList>
+  <ul>
+    <li *ngFor="let post of objArray; let i = index">
+      {{ i }} {{ post.postTitle }}
+      <button (click)="onDelete(i)">Delete</button>
+    </li>
+  </ul>
+</ng-template>
+<ng-template #noData>
+  <p>There is no data to fetch...</p>
+</ng-template>
+
+<button (click)="addNew()">Add new Data</button>
+
+<!-- Ng Template -->
+<div>
+  <button (click)="onClick('step 1')">Step 1</button>
+  <button (click)="onClick('step 2')">Step 2</button>
+  <button (click)="onClick('step 3')">Step 3</button>
+  <button (click)="onClick('step 4')">Step 4</button>
+</div>
+<div [ngSwitch]="stepForm">
+  <div *ngSwitchCase="'step 1'">Step 1 Form</div>
+  <div *ngSwitchCase="'step 2'">Step 2 Form</div>
+  <div *ngSwitchCase="'step 3'">Step 3 Form</div>
+  <div *ngSwitchDefault>Something Else</div>
+</div>
+
+<!-- Task 3 -->
+<div class="form-area">
+  <h1>User Details</h1>
+  <br />
+  <input type="text" [(ngModel)]="name" placeholder="Name" /><br />
+  <input type="text" [(ngModel)]="email" placeholder="E-Mail" /><br />
+  <textarea
+    rows="10"
+    cols="30"
+    [(ngModel)]="address"
+    placeholder="Address"
+  ></textarea
+  ><br />
+  <button (click)="saveData()">Save Data</button>
+</div>
+<div class="preview-area">
+  <div
+    *ngIf="userDetailsArray.length > 0; then userList; else noUserData"
+  ></div>
+  <ng-template #userList>
+    <table width="500">
+      <thead>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Action</th>
+      </thead>
+      <tr *ngFor="let userDetails of userDetailsArray; let i = index">
+        <td>
+          {{ i + 1 }}
+        </td>
+        <td>
+          {{ userDetails.name }}
+        </td>
+        <td>
+          {{ userDetails.email }}
+        </td>
+        <td>
+          {{ userDetails.address }}
+        </td>
+        <td>
+          <button (click)="deleteData(i)">Delete</button>
+        </td>
+      </tr>
+    </table>
+  </ng-template>
+  <ng-template #noUserData>
+    <p>There is no data to fetch...</p>
+  </ng-template>
+</div>
+
+<!-- Build-in Pipe -->
+<h1>{{ title | uppercase }}</h1>
+<h1>{{ title | lowercase }}</h1>
+
+<h1>{{ count | number }}</h1>
+<h1>{{ dcValue | number : "2.1-1" }}</h1>
+<h1>{{ price | currency : "GBP" : true : "2.1-1" }}</h1>
+
+<h1>{{ today | date : "shortDate" }}</h1>
+
+<h1>{{ postObj | json }}</h1>
+
+<h1>{{ 0.567 | percent : "1.1-1" }}</h1>
+<h1>{{ postObjArray | slice : 2 : 4 }}</h1>
+
+<!-- Custom Pipe -->
+<h3>{{ userdetails.city | appendCLI }}</h3>
+
+<h3>{{ dummyText | summary : 10 }}</h3>
+
+<h1>Post Component</h1>
+<app-post></app-post>
+<h1>Post List Component</h1>
+<app-post-list></app-post-list>
