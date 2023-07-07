@@ -22,7 +22,7 @@ import { PostService } from './Services/post.service';
     SummaryPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [PostService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

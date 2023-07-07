@@ -1,7 +1,7 @@
-// import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 
+@Injectable({ providedIn: 'root' })
 export class PostService {
-  //   @Injectable({ providedIn: 'root' })
   postList: Array<any> = [
     { id: 1, postTitle: 'Post 1' },
     { id: 2, postTitle: 'Post 2' },
