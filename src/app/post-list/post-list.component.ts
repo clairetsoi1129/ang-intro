@@ -5,7 +5,7 @@ import { PostService } from '../Services/post.service';
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css'],
-  providers: [PostService],
+  // providers: [PostService],
 })
 export class PostListComponent implements OnInit {
   title: string = 'List of Posts';

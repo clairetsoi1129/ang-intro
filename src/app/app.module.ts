@@ -9,6 +9,7 @@ import { PostListComponent } from './post-list/post-list.component';
 import { AppendPipe } from './Pipes/append.pipe';
 import { AppendCLIPipe } from './Pipes/append-cli.pipe';
 import { SummaryPipe } from './Pipes/summary.pipe';
+import { PostService } from './Services/post.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { SummaryPipe } from './Pipes/summary.pipe';
     SummaryPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [],
+  providers: [PostService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
