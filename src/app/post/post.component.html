@@ -3,6 +3,8 @@
 <app-post-list [fromParent]="parentMessage"></app-post-list>
 <button (click)="sendMessage()">Click</button>
 
+<h1>Add New Data</h1>
+<button (click)="addNewData()">Add New</button>
 <!-- Service -->
 <ul>
   <li *ngFor="let post of posts">{{ post.postTitle }}</li>

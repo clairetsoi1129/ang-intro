@@ -1,4 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
+import { Post } from '../Models/post';
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
@@ -9,4 +10,8 @@ export class PostService {
     { id: 4, postTitle: 'Post 4' },
     { id: 5, postTitle: 'Post 5' },
   ];
+
+  addPost(data: Post) {
+    this.postList.push(data);
+  }
 }
