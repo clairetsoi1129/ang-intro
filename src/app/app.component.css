@@ -2,10 +2,10 @@
   color: red;
 }
 
-.preview-area,
+/* .preview-area,
 .form-area {
   text-align: center;
-}
+} */
 
 table {
   margin-left: auto;
@@ -24,4 +24,8 @@ table {
 
 .text-weight {
   font-weight: bold;
+}
+
+.form-control.ng-touched.ng-invalid {
+  border: 2px solid red;
 }

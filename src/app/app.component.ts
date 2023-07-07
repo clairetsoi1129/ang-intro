@@ -1,5 +1,6 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { PostComponent } from './post/post.component';
+import { FormControl, NgForm, NgModel } from '@angular/forms';
 
 interface Post {
   id: number;
@@ -63,6 +64,7 @@ export class AppComponent implements AfterViewInit {
 
   // Task 3
   name: string = '';
+  fullName: string = '';
   email: string = '';
   address: string = '';
   userDetailsArray: Array<UserDetails> = [];
@@ -140,5 +142,13 @@ export class AppComponent implements AfterViewInit {
   deleteData(index: any) {
     // let index = this.objArray.indexOf(post);
     this.userDetailsArray.splice(index, 1);
+  }
+
+  onSubmit(f: NgForm) {
+    console.log(f.value);
+  }
+
+  getValue(f: NgModel) {
+    console.log(f);
   }
 }
