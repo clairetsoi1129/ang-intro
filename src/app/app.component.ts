@@ -18,6 +18,12 @@ export class AppComponent implements AfterViewInit {
   imgUrl: string =
     'https://smaller-pictures.appspot.com/images/dreamstime_xxl_65780868_small.jpg';
 
+  postTitle: string = '';
+  postDetails: string = '';
+  postImageUrl: string = '';
+  postUrl: string = '';
+  addBackground: boolean = false;
+
   @ViewChild(PostComponent) childComp: any;
 
   constructor() {
@@ -47,6 +53,10 @@ export class AppComponent implements AfterViewInit {
   }
 
   onKeyUpForBinding() {
+    console.log(this.textValue);
+  }
+
+  onKeyUpForPost() {
     console.log(this.textValue);
   }
 }

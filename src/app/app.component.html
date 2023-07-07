@@ -40,3 +40,56 @@
   [(ngModel)]="textValue"
   (keyup.enter)="onKeyUpForBinding()"
 />
+<hr />
+
+<div class="form-area">
+  <h1>Post Form</h1>
+  <br />
+  <input
+    type="text"
+    [(ngModel)]="postTitle"
+    (keyup.enter)="onKeyUpForPost()"
+    placeholder="Post Title"
+  /><br />
+  <textarea
+    rows="10"
+    cols="30"
+    [(ngModel)]="postDetails"
+    (keyup.enter)="onKeyUpForPost()"
+    placeholder="Post Details"
+  ></textarea
+  ><br />
+  <input
+    type="text"
+    [(ngModel)]="postImageUrl"
+    (keyup.enter)="onKeyUpForPost()"
+    placeholder="Post Image URL"
+  /><br />
+  <input
+    type="text"
+    [(ngModel)]="postUrl"
+    (keyup.enter)="onKeyUpForPost()"
+    placeholder="Post URL"
+  /><br />
+  <input
+    type="checkbox"
+    [(ngModel)]="addBackground"
+    (keyup.enter)="onKeyUpForPost()"
+  /><label for="addBackground">Add Background</label><br />
+</div>
+<div class="preview-area">
+  <h1>
+    <span [class.backgroundColor-yellow]="addBackground">{{ postTitle }}</span>
+  </h1>
+  <p>{{ postDetails }}</p>
+  <br />
+  <img [src]="postImageUrl" />
+  <br />
+  <a
+    [href]="postUrl"
+    target="_blank"
+    [style.display]="postUrl ? 'block' : 'none'"
+  >
+    More Details</a
+  >
+</div>
