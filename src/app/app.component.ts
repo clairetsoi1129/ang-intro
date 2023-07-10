@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators,
   FormArray,
+  FormBuilder,
 } from '@angular/forms';
 
 interface Post {
@@ -92,36 +93,53 @@ export class AppComponent implements AfterViewInit {
   emailRegex: string = "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'";
   contactRegex: string = '[789][0-9]{9}';
 
-  constructor() {
-    this.form = new FormGroup({
-      fullNameIn: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(20),
-      ]),
-      emailIn: new FormControl('', [
-        Validators.required,
-        // Validators.pattern(this.emailRegex),
-        Validators.email,
-      ]),
-      // addressIn: new FormControl('', [Validators.required]),
-
-      contactDetails: new FormGroup({
-        addressIn: new FormControl('', [Validators.required]),
-        shippingAddressIn: new FormControl('', [Validators.required]),
-        contactNoIn: new FormControl('', [
+  constructor(fb: FormBuilder) {
+    this.form = fb.group({
+      fullNameIn: [
+        '',
+        [
           Validators.required,
-          Validators.pattern(this.contactRegex),
-        ]),
+          Validators.minLength(5),
+          Validators.maxLength(20),
+        ],
+      ],
+      emailIn: ['', [Validators.required, Validators.email]],
+      contactDetails: fb.group({
+        addressIn: ['', [Validators.required]],
+        shippingAddressIn: ['', [Validators.required]],
+        contactNoIn: [
+          '',
+          [Validators.required, Validators.pattern(this.contactRegex)],
+        ],
       }),
-
-      skills: new FormArray([]),
+      skills: fb.array([]),
     });
-
-    console.log(this.childComp);
-    for (let i = 0; i < this.postArray.length; i++) {
-      console.log(this.postArray[i]);
-    }
+    // this.form = new FormGroup({
+    //   fullNameIn: new FormControl('', [
+    //     Validators.required,
+    //     Validators.minLength(5),
+    //     Validators.maxLength(20),
+    //   ]),
+    //   emailIn: new FormControl('', [
+    //     Validators.required,
+    //     // Validators.pattern(this.emailRegex),
+    //     Validators.email,
+    //   ]),
+    //   // addressIn: new FormControl('', [Validators.required]),
+    //   contactDetails: new FormGroup({
+    //     addressIn: new FormControl('', [Validators.required]),
+    //     shippingAddressIn: new FormControl('', [Validators.required]),
+    //     contactNoIn: new FormControl('', [
+    //       Validators.required,
+    //       Validators.pattern(this.contactRegex),
+    //     ]),
+    //   }),
+    //   skills: new FormArray([]),
+    // });
+    // console.log(this.childComp);
+    // for (let i = 0; i < this.postArray.length; i++) {
+    //   console.log(this.postArray[i]);
+    // }
   }
 
   ngAfterViewInit(): void {
