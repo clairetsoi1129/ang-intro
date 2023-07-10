@@ -1,6 +1,12 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { PostComponent } from './post/post.component';
-import { FormControl, NgForm, NgModel } from '@angular/forms';
+import {
+  FormControl,
+  NgForm,
+  NgModel,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 interface Post {
   id: number;
@@ -81,7 +87,34 @@ export class AppComponent implements AfterViewInit {
 
   @ViewChild(PostComponent) childComp: any;
 
+  form: any;
+  emailRegex: string = "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'";
+  contactRegex: string = '[789][0-9]{9}';
+
   constructor() {
+    this.form = new FormGroup({
+      fullNameIn: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20),
+      ]),
+      emailIn: new FormControl('', [
+        Validators.required,
+        // Validators.pattern(this.emailRegex),
+        Validators.email,
+      ]),
+      // addressIn: new FormControl('', [Validators.required]),
+
+      contactDetails: new FormGroup({
+        addressIn: new FormControl('', [Validators.required]),
+        shippingAddressIn: new FormControl('', [Validators.required]),
+        contactNoIn: new FormControl('', [
+          Validators.required,
+          Validators.pattern(this.contactRegex),
+        ]),
+      }),
+    });
+
     console.log(this.childComp);
     for (let i = 0; i < this.postArray.length; i++) {
       console.log(this.postArray[i]);
@@ -148,7 +181,27 @@ export class AppComponent implements AfterViewInit {
     console.log(f.value);
   }
 
+  onSubmitReactive() {
+    console.log(this.form.value);
+  }
+
   getValue(f: NgModel) {
     console.log(f);
+  }
+
+  get FullNameIn() {
+    return this.form.get('fullNameIn');
+  }
+  get EmailIn() {
+    return this.form.get('emailIn');
+  }
+  get AddressIn() {
+    return this.form.get('contactDetails.addressIn');
+  }
+  get ShippingAddressIn() {
+    return this.form.get('contactDetails.shippingAddressIn');
+  }
+  get Contact() {
+    return this.form.get('contactDetails.contactNoIn');
   }
 }
