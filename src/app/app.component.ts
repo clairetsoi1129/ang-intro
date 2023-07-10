@@ -6,6 +6,7 @@ import {
   NgModel,
   FormGroup,
   Validators,
+  FormArray,
 } from '@angular/forms';
 
 interface Post {
@@ -113,6 +114,8 @@ export class AppComponent implements AfterViewInit {
           Validators.pattern(this.contactRegex),
         ]),
       }),
+
+      skills: new FormArray([]),
     });
 
     console.log(this.childComp);
@@ -203,5 +206,20 @@ export class AppComponent implements AfterViewInit {
   }
   get Contact() {
     return this.form.get('contactDetails.contactNoIn');
+  }
+
+  get Skills() {
+    return this.form.get('skills') as FormArray;
+  }
+
+  addSkills(skills: HTMLInputElement) {
+    this.Skills.push(new FormControl(skills.value));
+    skills.value = '';
+
+    console.log(this.form.value);
+  }
+
+  removeSkills(i: number) {
+    this.Skills.removeAt(i);
   }
 }
